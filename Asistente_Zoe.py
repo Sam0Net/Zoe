@@ -24,7 +24,7 @@ from pytube import YouTube  # descargar videos
 # -------------------------------------------------------------------------
 
 # Configuraciones de Interfaz con CustomTkinter
-main_window = customtkinter.CTk() 
+main_window = customtkinter.CTk()
 main_window.title("Asistente Virtual ZOE")
 customtkinter.set_appearance_mode("light")
 customtkinter.set_default_color_theme("dark-blue")
@@ -51,7 +51,8 @@ comandos = """
     > Mensaje(Contacto)
     > Clima(Ciudad) 
     > Chiste
-    > Descansa
+    > Cierra (Programa)
+    > Descansa (Fin)
 """
 comandos_text = customtkinter.CTkLabel(
     master=main_window,
@@ -95,7 +96,7 @@ animate_gif(0)
 
 # Voces Diponibles, España, México y EE.UU
 def mexican_voice():
-    change_voice(0)
+    change_voice(3)
 
 
 def english_voice():
@@ -103,7 +104,7 @@ def english_voice():
 
 
 def spanish_voice():
-    change_voice(2)
+    change_voice(0)
 
 
 def change_voice(id):
@@ -122,6 +123,7 @@ engine = pyttsx3.init()
 voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)
 engine.setProperty("rate", 145)
+
 
 # Función para guardar información
 def charge_data(name_dict, name_file):
@@ -306,9 +308,9 @@ def cierra(rec):
             sub.call(f"TASKKILL /IM {kill_task} /F", shell=True)
             talk(f"Cerrando {task}")
     if "ciérrate" in rec:
-        talk(f"Adiós")
         # para cerrar nuestro programa
-        sub.call("TASKKILL /IM Asistente Zoe.exe /F", shell=True)
+        sub.call("TASKKILL /IM Zoe.exe /F", shell=True)
+        talk(f"Adiós")
 
 
 # Función para contar chistes
